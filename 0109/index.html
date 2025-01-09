@@ -11,7 +11,8 @@
     </style>
   </head>
   <body>
-    <button id="start">グラフを表示</button>
+    <button id="btn23">2023</button>
+    <button id="btn24">2024</button>
     <div id="container"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -69,8 +70,8 @@
           //id名「container」の要素にsvgを追加
           container.append(svg.node());
 
-          const startBtn = document.querySelector("#start");
-          startBtn.addEventListener("click", (e) => {
+          const btn23 = document.querySelector("#btn23");
+          btn23.addEventListener("click", (e) => {
             rect
               .transition()
               .duration(1000)
@@ -79,11 +80,30 @@
               .attr("width", (data) => scale(data.val23));
 
             val
+              .text((data) => data.val23)
               .transition()
               .duration(1000)
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
               .attr("x", (data) => imageW + 20 + scale(data.val23));
+          });
+
+          const btn24 = document.querySelector("#btn24");
+          btn24.addEventListener("click", (e) => {
+            rect
+              .transition()
+              .duration(1000)
+              .delay((data, index) => index * 200)
+              .ease(d3.easeBounceIn)
+              .attr("width", (data) => scale(data.val24));
+
+            val
+              .text((data) => data.val24)
+              .transition()
+              .duration(1000)
+              .delay((data, index) => index * 200)
+              .ease(d3.easeBounceIn)
+              .attr("x", (data) => imageW + 20 + scale(data.val24));
           });
         })
         .catch((error) => {});
