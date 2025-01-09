@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,11 +21,10 @@
       const width = 640;
       const height = 480;
       const imageW = 100;
-      const svg = d3.create("svg").attr("viewBox", `0 0 ${width} ${height}`); //レスポンシブ対応
+      const svg = d3.create("svg").attr("viewBox", `0 0 ${width} ${height}`);
 
       d3.json("./data2.json")
         .then((dataset) => {
-          //データのスケーリング
           const max23 = d3.max(dataset.y2023, (data) => data.val);
           const max24 = d3.max(dataset.y2024, (data) => data.val);
           const max = Math.max(max23, max24);
@@ -62,46 +61,14 @@
             .attr("font-size", 15)
             .attr("x", imageW + 20)
             .attr("y", 50)
-            .text((data) => data.val23);
+            .text((data) => data.val);
 
           const img = g
             .append("image")
             .attr("href", (data) => data.url)
             .attr("width", imageW);
 
-          //id名「container」の要素にsvgを追加
           container.append(svg.node());
-
-          const onChange = (key) => {
-            rect
-              .data(dataset[key])
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data.val));
-
-            val
-              .data(dataset[key])
-              .text((data) => data.val)
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("x", (data) => imageW + 20 + scale(data.val));
-
-            label.data(dataset[key]).text((data) => data.label);
-
-            img.data(dataset[key]).attr("href", (data) => data.url);
-          };
-
-          const btn = document.querySelectorAll("button");
-
-          btn.forEach((elem) => {
-            elem.addEventListener("click", () => {
-              onChange(elem.dataset.key);
-            });
-          });
         })
         .catch((error) => {});
     </script>
