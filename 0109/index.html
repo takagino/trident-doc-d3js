@@ -24,8 +24,8 @@
       d3.json("./data.json")
         .then((dataset) => {
           //データのスケーリング
-          const max = d3.max(dataset, (data) => data.val);
-          const min = d3.min(dataset, (data) => data.val);
+          const max = d3.max(dataset, (data) => Math.max(data.val23, data.val24));
+          const min = d3.min(dataset, (data) => Math.min(data.val23, data.val24));
           const scale = d3.scaleLinear().domain([0, max]).range([0, 400]);
 
           const g = svg
@@ -59,7 +59,7 @@
             .attr("font-size", 15)
             .attr("x", imageW + 20)
             .attr("y", 50)
-            .text((data) => data.val);
+            .text((data) => data.val23);
 
           const img = g
             .append("image")
@@ -76,14 +76,14 @@
               .duration(1000)
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data.val));
+              .attr("width", (data) => scale(data.val23));
 
             val
               .transition()
               .duration(1000)
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
-              .attr("x", (data) => imageW + 20 + scale(data.val));
+              .attr("x", (data) => imageW + 20 + scale(data.val23));
           });
         })
         .catch((error) => {});

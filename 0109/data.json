@@ -1,20 +1,23 @@
 [
   {
     "label": "Webデザイン",
-    "val": 30,
+    "val23": 30,
+    "val24": 40,
     "url": "https://computer.trident.ac.jp/courses/web_design/images/img_point_03.jpg",
-    "color": "#f00"
+    "color": "#028482"
   },
   {
     "label": "CG",
-    "val": 60,
+    "val23": 60,
+    "val24": 40,
     "url": "https://computer.trident.ac.jp/courses/cg_specialist/images/img_point_01.jpg",
-    "color": "#0f0"
+    "color": "#da3000"
   },
   {
     "label": "ゲーム",
-    "val": 90,
+    "val23": 90,
+    "val24": 200,
     "url": "https://computer.trident.ac.jp/courses/game_science/images/img_point_01.jpg",
-    "color": "#00f"
+    "color": "#3e63af"
   }
 ]
