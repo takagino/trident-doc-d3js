@@ -11,9 +11,9 @@
     </style>
   </head>
   <body>
-    <button id="btn23">2023</button>
-    <button id="btn24">2024</button>
-    <button id="btn25">2025</button>
+    <button id="btn23" data-key="val23">2023</button>
+    <button id="btn24" data-key="val24">2024</button>
+    <button id="btn25" data-key="val25">2025</button>
 
     <div id="container"></div>
 
@@ -89,19 +89,11 @@
               .attr("x", (data) => imageW + 20 + scale(data[key]));
           };
 
-          const btn23 = document.querySelector("#btn23");
-          btn23.addEventListener("click", (e) => {
-            onChange("val23");
-          });
-
-          const btn24 = document.querySelector("#btn24");
-          btn24.addEventListener("click", (e) => {
-            onChange("val24");
-          });
-
-          const btn25 = document.querySelector("#btn25");
-          btn25.addEventListener("click", (e) => {
-            onChange("val25");
+          const btn = document.querySelectorAll("button");
+          btn.forEach((elem) => {
+            elem.addEventListener("click", () => {
+              onChange(elem.dataset.key);
+            });
           });
         })
         .catch((error) => {});
