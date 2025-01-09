@@ -13,6 +13,8 @@
   <body>
     <button id="btn23">2023</button>
     <button id="btn24">2024</button>
+    <button id="btn25">2025</button>
+
     <div id="container"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -25,8 +27,8 @@
       d3.json("./data.json")
         .then((dataset) => {
           //データのスケーリング
-          const max = d3.max(dataset, (data) => Math.max(data.val23, data.val24));
-          const min = d3.min(dataset, (data) => Math.min(data.val23, data.val24));
+          const max = d3.max(dataset, (data) => Math.max(data.val23, data.val24, data.val25));
+          const min = d3.min(dataset, (data) => Math.min(data.val23, data.val24, data.val25));
           const scale = d3.scaleLinear().domain([0, max]).range([0, 400]);
 
           const g = svg
@@ -104,6 +106,24 @@
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
               .attr("x", (data) => imageW + 20 + scale(data.val24));
+          });
+
+          const btn25 = document.querySelector("#btn25");
+          btn25.addEventListener("click", (e) => {
+            rect
+              .transition()
+              .duration(1000)
+              .delay((data, index) => index * 200)
+              .ease(d3.easeBounceIn)
+              .attr("width", (data) => scale(data.val25));
+
+            val
+              .text((data) => data.val25)
+              .transition()
+              .duration(1000)
+              .delay((data, index) => index * 200)
+              .ease(d3.easeBounceIn)
+              .attr("x", (data) => imageW + 20 + scale(data.val25));
           });
         })
         .catch((error) => {});
