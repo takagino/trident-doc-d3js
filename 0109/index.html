@@ -72,6 +72,23 @@
           //id名「container」の要素にsvgを追加
           container.append(svg.node());
 
+          const onChange = (key) => {
+            rect
+              .transition()
+              .duration(1000)
+              .delay((data, index) => index * 200)
+              .ease(d3.easeBounceIn)
+              .attr("width", (data) => scale(data[key]));
+
+            val
+              .text((data) => data[key])
+              .transition()
+              .duration(1000)
+              .delay((data, index) => index * 200)
+              .ease(d3.easeBounceIn)
+              .attr("x", (data) => imageW + 20 + scale(data[key]));
+          };
+
           const btn23 = document.querySelector("#btn23");
           btn23.addEventListener("click", (e) => {
             rect
