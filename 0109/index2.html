@@ -11,10 +11,8 @@
     </style>
   </head>
   <body>
-    <button id="btn22" data-key="val22">2022</button>
-    <button id="btn23" data-key="val23">2023</button>
-    <button id="btn24" data-key="val24">2024</button>
-    <button id="btn25" data-key="val25">2025</button>
+    <button id="btn23" data-key="y2023">2023</button>
+    <button id="btn24" data-key="y2024">2024</button>
 
     <div id="container"></div>
 
@@ -25,16 +23,17 @@
       const imageW = 100;
       const svg = d3.create("svg").attr("viewBox", `0 0 ${width} ${height}`); //レスポンシブ対応
 
-      d3.json("./data.json")
+      d3.json("./data2.json")
         .then((dataset) => {
           //データのスケーリング
-          const max = d3.max(dataset, (data) => Math.max(data.val23, data.val24, data.val25));
-          const min = d3.min(dataset, (data) => Math.min(data.val23, data.val24, data.val25));
+          const max23 = d3.max(dataset.y2023, (data) => data.val);
+          const max24 = d3.max(dataset.y2024, (data) => data.val);
+          const max = Math.max(max23, max24);
           const scale = d3.scaleLinear().domain([0, max]).range([0, 400]);
 
           const g = svg
             .selectAll(".item")
-            .data(dataset)
+            .data(dataset.y2023)
             .enter()
             .append("g")
             .classed("item", true)
@@ -75,22 +74,29 @@
 
           const onChange = (key) => {
             rect
+              .data(dataset[key])
               .transition()
               .duration(1000)
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data[key])); //data.val23
+              .attr("width", (data) => scale(data.val));
 
             val
-              .text((data) => data[key])
+              .data(dataset[key])
+              .text((data) => data.val)
               .transition()
               .duration(1000)
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
-              .attr("x", (data) => imageW + 20 + scale(data[key]));
+              .attr("x", (data) => imageW + 20 + scale(data.val));
+
+            label.data(dataset[key]).text((data) => data.label);
+
+            img.data(dataset[key]).attr("href", (data) => data.url);
           };
 
           const btn = document.querySelectorAll("button");
+
           btn.forEach((elem) => {
             elem.addEventListener("click", () => {
               onChange(elem.dataset.key);
