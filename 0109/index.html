@@ -78,7 +78,7 @@
               .duration(1000)
               .delay((data, index) => index * 200)
               .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data[key]));
+              .attr("width", (data) => scale(data[key])); //data.val23
 
             val
               .text((data) => data[key])
@@ -91,56 +91,17 @@
 
           const btn23 = document.querySelector("#btn23");
           btn23.addEventListener("click", (e) => {
-            rect
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data.val23));
-
-            val
-              .text((data) => data.val23)
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("x", (data) => imageW + 20 + scale(data.val23));
+            onChange("val23");
           });
 
           const btn24 = document.querySelector("#btn24");
           btn24.addEventListener("click", (e) => {
-            rect
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data.val24));
-
-            val
-              .text((data) => data.val24)
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("x", (data) => imageW + 20 + scale(data.val24));
+            onChange("val24");
           });
 
           const btn25 = document.querySelector("#btn25");
           btn25.addEventListener("click", (e) => {
-            rect
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("width", (data) => scale(data.val25));
-
-            val
-              .text((data) => data.val25)
-              .transition()
-              .duration(1000)
-              .delay((data, index) => index * 200)
-              .ease(d3.easeBounceIn)
-              .attr("x", (data) => imageW + 20 + scale(data.val25));
+            onChange("val25");
           });
         })
         .catch((error) => {});
